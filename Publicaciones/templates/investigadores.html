@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Investigadores</title>
+    </head>
+    <body>
+        <div>
+            <h3>Lista de Investigadores</h3>
+        </div>
+        <div class="container">
+            <hr />
+            {% for investigador in investigadores %}
+            <div class="art">
+              <h2>
+                {{ investigador.nombres }} , {{ investigador.apellidos }}
+              </h2>
+
+              <p>
+                Resumen {{ investigador.resumen }}
+              </p>
+
+            </div>
+            <hr />
+            {% endfor %}
+
+        </div>
+    </body>
+</html>

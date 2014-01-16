@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'investigadores.views.home', name='home'),
     # url(r'^investigadores/', include('investigadores.foo.urls')),
+    url(r'^investigadores/','Publicaciones.views.investigadores', name='lista_inv'),
     url(r'^$','Publicaciones.views.home', name='home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
