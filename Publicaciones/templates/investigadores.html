@@ -1,27 +1,32 @@
-<html>
-    <head>
-        <title>Investigadores</title>
-    </head>
-    <body>
-        <div>
+{% extends 'base.html' %}
+    {% block cabecera %}
             <h3>Lista de Investigadores</h3>
+    {% endblock %}
+    {% block contenido %}
+        <div class="search">
+            <form action="/list">
+                <input type="text" name="name_inv" class="span4">
+                <input type="submit" name="name_inv" class="btn" value="Buscar">
+            </form>
         </div>
-        <div class="container">
-            <hr />
+
             {% for investigador in investigadores %}
             <div class="art">
-              <h2>
-                {{ investigador.nombres }} , {{ investigador.apellidos }}
-              </h2>
+              <h4>
+                {{ investigador.nombres }}, {{ investigador.apellidos }}
+              </h4>
 
               <p>
                 Resumen {{ investigador.resumen }}
+              </p>
+              <p>
+                Web  {{ investigador.web_personal }}
               </p>
 
             </div>
             <hr />
             {% endfor %}
 
-        </div>
-    </body>
-</html>
+
+    {% endblock %}
+

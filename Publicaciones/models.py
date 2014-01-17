@@ -15,23 +15,31 @@ class DisciplinaInv(models.Model):
     disciplina_inv = models.CharField("Disciplina de Investigacion", max_length=80)
     subarea= models.ForeignKey(SubareaInv)
 
+class Sexo(models.Model):
+    sexo = models.CharField(max_length=30)
+    def __unicode__(self):
+        return self.sexo
+
 class Investigador(models.Model):
     apellidos = models.CharField(max_length = 60)
     nombres = models.CharField(max_length = 30)
     resumen = models.TextField()
-    web_personal = models.CharField(max_length = 80)
-    pais_nacimiento = models.CharField(max_length = 50)
-    sexo = models.CharField(max_length = 50)
+    web_personal = models.URLField("Web Personal",max_length = 80, null=True)
+    pais_nacimiento = models.CharField("Pais de Nacimiento", max_length = 50)
+    sexo = models.ForeignKey(Sexo)
     email = models.EmailField(max_length = 75)
     dni = models.CharField(max_length = 50)
-    fecha_nac = models.DateTimeField('fecha nacimiento')
-    direccion_actual = models.CharField("Direccion Actual",max_length = 100)
-    telefono = models.CharField("telefono de Contacto",max_length = 20)
-    celular = models.CharField(max_length=15)
+    fecha_nac = models.DateTimeField("Fecha nacimiento")
+    direccion_actual = models.CharField("Direccion Actual", max_length = 100, null=True)
+    telefono = models.CharField("telefono de Contacto", max_length = 20, null=True)
+    celular = models.CharField(max_length=15, null=True)
     pais = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     provincia = models.CharField(max_length=30)
     distrito = models.CharField(max_length=30)
+    def __unicode__(self):
+        nombrecompleto= "%s %s"%(self.nombres, self.apellidos)
+        return nombrecompleto
 
 class Investigador_Area(models.Model):
     id_area_inv = models.AutoField(primary_key=True)
@@ -41,6 +49,7 @@ class Investigador_Area(models.Model):
 
 class ExperienciaLaboral(models.Model):
     id_exp_lab = models.AutoField(primary_key=True)
+    investigador = models.ForeignKey(Investigador)
     nombre_ins = models.CharField("Nombre de la Institucion", max_length=80)
     direccion = models.CharField(max_length=80)
     cargo = models.CharField(max_length=50)
@@ -58,19 +67,27 @@ class ExperienciaLaboral(models.Model):
     email_lab = models.EmailField("Correo laboral",max_length=75)
     fx_ini = models.DateTimeField('Fecha de Inicio')
     fx_fin = models.DateTimeField('Fecha Fin')
-    investigador = models.ForeignKey(Investigador)
+
+class NivelAprendizaje(models.Model):
+    nivel = models.CharField(max_length=60)
 
 class FormacionAcademica(models.Model):
     id_form_acad = models.AutoField(primary_key=True)
-    grado = models.CharField("Grado Obtenido", max_length=20)
-    nom_titulo = models.CharField("Nombre de Titulo", max_length=50)
-    p_estudio = models.CharField("Pais de Estudio", max_length=15)
+    investigador = models.ForeignKey(Investigador)
+    grado = models.CharField("Grado Obtenido", max_length=100)
+    nom_titulo = models.CharField("Nombre de Titulo", max_length=100)
+    p_estudio = models.CharField("Pais de Estudio", max_length=60)
+    c_estudios = models.CharField("Centro de Estudio", max_length=100)
     fx_ini = models.DateTimeField('Fecha de Inicio')
     fx_fin = models.DateTimeField('Fecha Fin')
-    investigador = models.ForeignKey(Investigador)
+    def __unicode__(self):
+        nombrecompleto= "%s %s %s"%(self.investigador.nombres, self.investigador.apellidos, self.nom_titulo)
+        return nombrecompleto
+
 
 class FormacionContinua(models.Model):
     id_form_cont = models.AutoField(primary_key=True)
+    investigador = models.ForeignKey(Investigador)
     cap_continua = models.CharField("Capacitacion Continua", max_length=100)
     cent_est = models.CharField("Centro de Estudios", max_length=100)
     pais = models.CharField(max_length=30)
@@ -78,15 +95,22 @@ class FormacionContinua(models.Model):
     cant_frec = models.CharField("Cantidad de frecuencia", max_length=10)
     fx_ini = models.DateTimeField('Fecha de Inicio')
     fx_fin = models.DateTimeField('Fecha Fin')
-    investigador = models.ForeignKey(Investigador)
+
+
+class Languaje(models.Model):
+    iddioma = models.CharField("Idioma", max_length=60)
+    def __unicode__(self):
+        return self.iddioma
 
 class Idioma(models.Model):
     id_idioma = models.AutoField(primary_key=True)
-    des_idioma = models.CharField("Descripcion de Idioma", max_length=60)
+    investigador = models.ForeignKey(Investigador)
+    idioma = models.ForeignKey(Languaje)
     lectura = models.CharField(max_length=60)
     conversacion = models.CharField(max_length=60)
     escritura = models.CharField(max_length=60)
     forma_apren = models.CharField("Forma de Aprendizaje", max_length=60)
+
 
 class Colaboradores(models.Model):
     id_colaboradores = models.AutoField(primary_key=True)
@@ -109,6 +133,7 @@ class AreaOCDE_SubareaACDE(models.Model):
 
 class ProyectoInv(models.Model):
     id_proyecto = models.AutoField(primary_key=True)
+    investigador = models.ForeignKey(Investigador)
     titulo = models.CharField(max_length=150)
     descripcion = models.TextField()
     palabra_clave = models.CharField(max_length=50)
@@ -122,8 +147,10 @@ class ProyectoInv(models.Model):
     id_colaboradores = models.ForeignKey(Colaboradores)
     id_areasubarea = models.ForeignKey(AreaOCDE_SubareaACDE)
 
+
 class ProduccionCientifica(models.Model):
     id_prodcien = models.AutoField(primary_key=True)
+    investigador = models.ForeignKey(Investigador)
     tipo = models.CharField(max_length=60)
     rol = models.CharField(max_length=60)
     author_pri = models.CharField(max_length=60)
@@ -136,6 +163,7 @@ class ProduccionCientifica(models.Model):
     archivo = models.FileField(upload_to='.')
 
 class Distinciones(models.Model):
+    investigador = models.ForeignKey(Investigador)
     intitucion = models.CharField(max_length=75)
     nombre_dist = models.CharField(max_length=75)
     pais = models.CharField(max_length=60)

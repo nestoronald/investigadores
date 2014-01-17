@@ -6,7 +6,7 @@ from Publicaciones.models import *
 
 def home(request):
     # Recuperar 10 investigadores como minimo
-    return render_to_response('index.html')
+    return render_to_response('base.html')
 
 def investigadores(request):
     inv = Investigador.objects.all()[:10]
