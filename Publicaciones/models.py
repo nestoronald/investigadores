@@ -1,7 +1,7 @@
 from django.db import models
 
 class AreaInv(models.Model):
-    id_area = models.AutoField(primary_key=True)
+    # id_area = models.AutoField(primary_key=True)
     area = models.CharField("Area de Investigacion", max_length=80)
 
 
@@ -24,27 +24,28 @@ class Investigador(models.Model):
     apellidos = models.CharField(max_length = 60)
     nombres = models.CharField(max_length = 30)
     resumen = models.TextField()
-    web_personal = models.URLField("Web Personal",max_length = 80, null=True)
+    web_personal = models.URLField("Web Personal",max_length = 80, blank=True)
     pais_nacimiento = models.CharField("Pais de Nacimiento", max_length = 50)
     sexo = models.ForeignKey(Sexo)
     email = models.EmailField(max_length = 75)
     dni = models.CharField(max_length = 50)
-    fecha_nac = models.DateTimeField("Fecha nacimiento")
-    direccion_actual = models.CharField("Direccion Actual", max_length = 100, null=True)
-    telefono = models.CharField("telefono de Contacto", max_length = 20, null=True)
-    celular = models.CharField(max_length=15, null=True)
+    fecha_nac = models.DateField("Fecha nacimiento")
+    direccion_actual = models.CharField("Direccion Actual", max_length = 100, blank=True)
+    telefono = models.CharField("telefono de Contacto", max_length = 20, blank=True)
+    celular = models.CharField(max_length=15, blank=True)
     pais = models.CharField(max_length=30)
     region = models.CharField(max_length=30)
     provincia = models.CharField(max_length=30)
     distrito = models.CharField(max_length=30)
+    Area_Investigacion = models.ManyToManyField(AreaInv)
     def __unicode__(self):
         nombrecompleto= "%s %s"%(self.nombres, self.apellidos)
         return nombrecompleto
 
-class Investigador_Area(models.Model):
-    id_area_inv = models.AutoField(primary_key=True)
-    id_area = models.ForeignKey(AreaInv)
-    id_inv = models.ForeignKey(Investigador)
+# class Investigador_Area(models.Model):
+#     id_area_inv = models.AutoField(primary_key=True)
+#     id_area = models.ForeignKey(AreaInv)
+#     id_inv = models.ForeignKey(Investigador)
 
 
 class ExperienciaLaboral(models.Model):
@@ -65,11 +66,8 @@ class ExperienciaLaboral(models.Model):
     provincia = models.CharField(max_length=30)
     distrito = models.CharField(max_length=30)
     email_lab = models.EmailField("Correo laboral",max_length=75)
-    fx_ini = models.DateTimeField('Fecha de Inicio')
-    fx_fin = models.DateTimeField('Fecha Fin')
-
-class NivelAprendizaje(models.Model):
-    nivel = models.CharField(max_length=60)
+    fx_ini = models.DateField('Fecha de Inicio')
+    fx_fin = models.DateField('Fecha Fin')
 
 class FormacionAcademica(models.Model):
     id_form_acad = models.AutoField(primary_key=True)
@@ -78,8 +76,8 @@ class FormacionAcademica(models.Model):
     nom_titulo = models.CharField("Nombre de Titulo", max_length=100)
     p_estudio = models.CharField("Pais de Estudio", max_length=60)
     c_estudios = models.CharField("Centro de Estudio", max_length=100)
-    fx_ini = models.DateTimeField('Fecha de Inicio')
-    fx_fin = models.DateTimeField('Fecha Fin')
+    fx_ini = models.DateField('Fecha de Inicio')
+    fx_fin = models.DateField('Fecha Fin')
     def __unicode__(self):
         nombrecompleto= "%s %s %s"%(self.investigador.nombres, self.investigador.apellidos, self.nom_titulo)
         return nombrecompleto
@@ -93,8 +91,8 @@ class FormacionContinua(models.Model):
     pais = models.CharField(max_length=30)
     frecuencia = models.CharField(max_length=30)
     cant_frec = models.CharField("Cantidad de frecuencia", max_length=10)
-    fx_ini = models.DateTimeField('Fecha de Inicio')
-    fx_fin = models.DateTimeField('Fecha Fin')
+    fx_ini = models.DateField('Fecha de Inicio')
+    fx_fin = models.DateField('Fecha Fin')
 
 
 class Languaje(models.Model):
@@ -124,12 +122,14 @@ class AreaOCDE(models.Model):
 
 class SubareaOCDE(models.Model):
     id_subareaocde = models.AutoField(primary_key=True)
-    SubareaOCDE = models.CharField(max_length=60)
+    areaOCDE = models.ForeignKey(AreaOCDE)
+    subareaOCDE = models.CharField(max_length=60)
 
-class AreaOCDE_SubareaACDE(models.Model):
-    id_areasubarea = models.AutoField(primary_key=True)
-    id_areaocde = models.ForeignKey(AreaOCDE)
-    id_subareaocde = models.ForeignKey(SubareaOCDE)
+
+# class AreaOCDE_SubareaOCDE(models.Model):
+#     id_areasubarea = models.AutoField(primary_key=True)
+#     id_areaocde = models.ForeignKey(AreaOCDE)
+#     id_subareaocde = models.ForeignKey(SubareaOCDE)
 
 class ProyectoInv(models.Model):
     id_proyecto = models.AutoField(primary_key=True)
@@ -137,15 +137,15 @@ class ProyectoInv(models.Model):
     titulo = models.CharField(max_length=150)
     descripcion = models.TextField()
     palabra_clave = models.CharField(max_length=50)
-    fx_ini = models.DateTimeField('Fecha de Inicio')
-    fx_fin = models.DateTimeField('Fecha Fin')
+    fx_ini = models.DateField('Fecha de Inicio')
+    fx_fin = models.DateField('Fecha Fin')
     rol = models.CharField(max_length=50)
     responsable = models.CharField(max_length=80)
     institucion_principal = models.CharField(max_length=120)
     institucion_colaboradora = models.CharField(max_length=120)
     monto = models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True)
-    id_colaboradores = models.ForeignKey(Colaboradores)
-    id_areasubarea = models.ForeignKey(AreaOCDE_SubareaACDE)
+    colaboradores = models.ManyToManyField(Colaboradores)
+    subarea_OCDE = models.ManyToManyField(SubareaOCDE)
 
 
 class ProduccionCientifica(models.Model):
@@ -158,7 +158,7 @@ class ProduccionCientifica(models.Model):
     id_colaboradores = models.ForeignKey(Colaboradores)
     titulo = models.CharField(max_length=100)
     ubicacion = models.CharField(max_length=70)
-    fx_produccion= models.DateTimeField('Fecha de Produccion')
+    fx_produccion= models.DateField('Fecha de Produccion')
     palabra_clave = models.CharField(max_length=70)
     archivo = models.FileField(upload_to='.')
 
@@ -168,4 +168,10 @@ class Distinciones(models.Model):
     nombre_dist = models.CharField(max_length=75)
     pais = models.CharField(max_length=60)
     web_referencia = models.CharField(max_length=85)
-    fx_referencia = models.DateTimeField('Fecha de Referencia')
+    fx_referencia = models.DateField('Fecha de Referencia')
+
+# class ModelDemo(models.Model):
+#     textorequerido = models.CharField(max_length=75)
+#     textonorequerido = models.CharField(max_length=75, blank=True)
+#     def __unicode__(self):
+#         return self.textorequerido
