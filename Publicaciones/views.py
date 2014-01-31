@@ -11,3 +11,5 @@ def home(request):
 def investigadores(request):
     inv = Investigador.objects.all()[:10]
     return render_to_response('investigadores.html',{'investigadores':inv})
+def investigador(request,idinv=1):
+    return render_to_response('investigador.html',{'investigador':Investigador.objects.get(id=idinv)})

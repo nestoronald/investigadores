@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+    {% block cabecera %}
+
+          <h3>{{investigador.nombres}}, {{investigador.apellidos}}</h3>
+
+    {% endblock %}
+    {% block contenido %}
+
+            <div class="art">
+              <p>
+                Resumen {{ investigador.resumen }}
+              </p>
+              <p>Web personal:  {{ investigador.web_personal }}</p>
+              <p>Pais de Nacimiento:  {{ investigador.pais_nacimiento }}</p>
+              <p>Pais de residencia:  {{ investigador.pais }}</p>
+              <p>Región de residencia:  {{ investigador.region }}</p>
+              <p>Provincia de residencia:  {{ investigador.provincia }}</p>
+              <p>Distrito de residencia:  {{ investigador.distrito }}</p>
+            </div>
+            <hr />
+
+
+    {% endblock %}
