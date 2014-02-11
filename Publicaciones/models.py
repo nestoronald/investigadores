@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
+from django.contrib.auth.models import User
 
 class AreaInv(models.Model):
     # id_area = models.AutoField(primary_key=True)
@@ -8,6 +9,7 @@ class AreaInv(models.Model):
         return self.area
 
 class Investigador(models.Model):
+    user = models.OneToOneField(User)
     apellidos = models.CharField(max_length = 60)
     nombres = models.CharField(max_length = 30)
     resumen = models.TextField()

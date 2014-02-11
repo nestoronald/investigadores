@@ -11,6 +11,10 @@ urlpatterns = patterns('',
     url(r'^investigadores/',include('Publicaciones.urls')),
     # url(r'^investigadores/','Publicaciones.views.investigadores', name='lista_inv'),
     url(r'^$','Publicaciones.views.home', name='home'),
+    url(r'^login/$', 'Publicaciones.views.login_view', name="vista_login"),
+    url(r'^logout/$', 'Publicaciones.views.logout_view', name="vista_logout"),
+    url(r'^registro/$','Publicaciones.views.register_view',name='vista_registro'),
+    url(r'^editPerfil/(?P<id_user>.*)/$','Publicaciones.views.edit_profile',name= "vista_editar_perfil"),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

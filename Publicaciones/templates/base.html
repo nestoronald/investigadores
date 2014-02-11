@@ -41,11 +41,16 @@
                                 <ul id="menu" class=" nav"></ul>
                                 <ul class="nav nav-pills pullright">
                                     <li><a href="/">Inicio</a></li>
-                                    <li><a href="/investigadores/todos">Investigadores</a></li>
+                                    <li><a href="/investigadores">Investigadores</a></li>
                                     <li><a href="#">Curriculum Vitae</a></li>
                                     <li><a href="#">Publicaciones</a></li>
                                     <li><a href="#">Proyectos</a></li>
                                     <li><a href="#">Blog</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url "vista_logout" %}"> Cerrar Sesion </a></li>
+                                    {% else %}
+                                    <li><a href="{% url "vista_login" %}"> Ingresar </a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -70,6 +75,14 @@
           <div class="last container-fluid" id="contenido_inv">
                 <div class="row-fluid">
                     {% block contenido %} {% endblock %}
+                </div>
+                <div class="sidebar">
+                        {%if user.is_authenticated %}
+                            <p>Bienvenido {{ user }} </p>
+                            <!-- <img src="{{get_image_profile}}" width="50px" heigth="50px"/> -->
+                        {% else %}
+                             <a href="/login/" class="btn btn-primary">Ingresar</a>
+                        {% endif %}
                 </div>
           </div>
         <div class="container">
