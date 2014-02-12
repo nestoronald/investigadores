@@ -177,9 +177,10 @@ body .tabactive a{
 .container .navbar-inverse .nav-collapse .nav>li>a:hover{
     color:#fff;
 }
-.navbar .caret{
+#login-igp .caret{
     border-top-color: #ffffff;
     border-bottom-color: #ffffff;
+    margin-top: 13px;
 }
 .i-error{
     background-position: -326px -958.5px;
@@ -195,32 +196,7 @@ body .tabactive a{
 .showdiv.txt-azul:hover, .showdiv.divactive {
     background: #E6E1E1;
 }
-/*----------themas*/
 
-#nuevo_tema_publicacion{
-    border: 1px solid rgb(235, 232, 232);
-    padding: 4px 16px;
-    position:relative;
-}
-
-#newTheme .input-error {
-    border-color: #B94A48;
-}
-.msj{
-    border: 1px solid;
-    margin: 10px 0px;
-    padding: 15px 13px 15px 27px;
-    position: relative;
-}
-.exito {
-    color: #4F8A10;
-    background-color: #DFF2BF;
-}
-#msj-theme{
-    display: inline-block;
-    position: absolute;
-    left:0;
-}
 @media (max-width: 480px){
     #imghome img {
         width: 300px;
@@ -308,20 +284,6 @@ body .tabactive a{
 }
 
 
-    /*view search */
-    #searchCat .searchSelect {
-        margin: 0 22% 4% 22%;
-    }
-
-#formLogin .btn:hover
-{
-    background: #333231;
-    color: #fff;
-    text-shadow: none;
-}
-.color_red {
-    color: #C85305;
-}
 .none {
     display: none;
 }
@@ -562,4 +524,42 @@ td a img{
 }
 .overflow {
     overflow: hidden;
+}
+#m-perfil-img{
+    width: 33px;
+    height: 33px;
+}
+#m-perfil-img img {
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin-top: 4px;
+}
+#m-perfil-username{
+    margin-top: 7px;
+}
+#login-igp .dropdown-toggle{
+    display: block;
+    color:#999;
+    background: none;
+}
+#login-igp .dropdown-menu>li>a:hover{
+    background: #BD852D;
+}
+
+#login-igp .dropdown-toggle:hover{
+    text-decoration: none;
+}
+
+.igp-panel-box {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    padding: 20px;
+}
+.igp-success{
+    background: #ccc;
+    border: #blue;
 }

@@ -9,7 +9,7 @@ class AreaInv(models.Model):
         return self.area
 
 class Investigador(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, unique=True, related_name='perfil_inv')
     apellidos = models.CharField(max_length = 60)
     nombres = models.CharField(max_length = 30)
     resumen = models.TextField()

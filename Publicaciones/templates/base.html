@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
 
-    <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-
 </head>
 
 <!-- Global IE fix to avoid layout crash when single word size wider than column width -->
@@ -47,7 +45,20 @@
                                     <li><a href="#">Proyectos</a></li>
                                     <li><a href="#">Blog</a></li>
                                     {% if user.is_authenticated %}
-                                    <li><a href="{% url "vista_logout" %}"> Cerrar Sesion </a></li>
+                                    <li id="login-igp"> <span class="realtive dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span id="m-perfil-img">
+                                                <img src="/static/img/noavatar.jpg" alt="avatar-igp" /></span>
+                                                <span id="m-perfil-username">{{user}}</span>
+                                                <b class="caret"></b>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li> <a href="/miperfil">Mi Perfil</a> </li>
+                                                <li><a href="/editarPerfil">Editar Perfil</a></li>
+                                                <li> <a href="{% url "vista_logout" %}">Cerra Sesión</a></li>
+                                            </ul>
+                                         </span>
+                                     </li>
                                     {% else %}
                                     <li><a href="{% url "vista_login" %}"> Ingresar </a></li>
                                     {% endif %}
@@ -76,14 +87,14 @@
                 <div class="row-fluid">
                     {% block contenido %} {% endblock %}
                 </div>
-                <div class="sidebar">
+                <!-- <div class="sidebar">
                         {%if user.is_authenticated %}
                             <p>Bienvenido {{ user }} </p>
-                            <!-- <img src="{{get_image_profile}}" width="50px" heigth="50px"/> -->
+                            <img src="{{get_image_profile}}" width="50px" heigth="50px"/>
                         {% else %}
                              <a href="/login/" class="btn btn-primary">Ingresar</a>
                         {% endif %}
-                </div>
+                </div> -->
           </div>
         <div class="container">
             <div class="row-fluid">
@@ -97,6 +108,7 @@
         </div>
   </div>
 <script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/script-igp.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <!-- <script src="/static/js/bootstrap-collapse.js"></script>
 <script src="/static/js/bootstrap-tooltip.js"></script> -->

@@ -35,7 +35,14 @@ class RegisterForm(forms.Form):
             pass
         else:
             raise forms.ValidationError('Password no coinciden')
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', )
+
 class addProfileForm(forms.ModelForm):
     class Meta:
-        model   = User
+        model = Investigador
+        exclude = {'user',}
+
 

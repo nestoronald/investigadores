@@ -2,8 +2,9 @@
 from django.shortcuts import render_to_response
 from Publicaciones.models import *
 from django.template import RequestContext
-from forms import LoginForm, RegisterForm, addProfileForm
+from forms import LoginForm, RegisterForm, addProfileForm, UserForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 #from django.core.context_processors import csrf
 from django.contrib.auth import login, logout, authenticate
 #from django.http import HttpresponseRedirect
@@ -11,7 +12,7 @@ from django.contrib.auth import login, logout, authenticate
 
 def home(request):
     # Recuperar 10 investigadores como minimo
-    return render_to_response('base.html',context_instance=RequestContext(request))
+    return render_to_response('home.html',context_instance=RequestContext(request))
 
 def investigadores(request):
     inv = Investigador.objects.all()[:10]
@@ -61,9 +62,11 @@ def register_view(request):
             return  render_to_response('register.html',ctx,context_instance=RequestContext(request))
     ctx = {'form':form}
     return render_to_response('register.html',ctx,context_instance=RequestContext(request))
-def edit_profile(request,id_user=1):
+
+@login_required
+def edit_profile(request,id_user):
     info = "iniciado"
-    user = User.objects.get(pk=id_user)
+    user = Investigador.objects.get(pk=id_user)
     if request.method == "POST":
         form = addProfileForm(request.POST,request.FILES,instance=user)
         if form.is_valid():
@@ -77,5 +80,29 @@ def edit_profile(request,id_user=1):
         form = addProfileForm(instance=user)
     ctx = {'form':form,'informacion':info}
     return render_to_response('editProfile.html',ctx,context_instance=RequestContext(request))
+
+@login_required
+def editar_perfil(request):
+    mensaje = ""
+    if request.method == 'POST':
+        # formulario enviado
+        user_form = UserForm(request.POST, instance=request.user)
+        perfil_form = addProfileForm(request.POST, instance=request.user.perfil_inv)
+
+        if user_form.is_valid() and perfil_form.is_valid():
+            # formulario validado correctamente
+            user_form.save()
+            perfil_form.save()
+            mensaje = "Sus datos han sido actualizados"
+            user_form = UserForm(instance=request.user)
+            perfil_form = addProfileForm(instance=request.user.perfil_inv)
+            #return HttpResponseRedirect('/formulario-guardado/')
+
+    else:
+        # formulario inicial
+        user_form = UserForm(instance=request.user)
+        perfil_form = addProfileForm(instance=request.user.perfil_inv)
+    ctx = { 'user_form': user_form,  'perfil_form': perfil_form, 'mensaje':mensaje }
+    return render_to_response('editarPerfil.html', ctx, context_instance=RequestContext(request))
 
 
