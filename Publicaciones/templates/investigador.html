@@ -6,18 +6,58 @@
     {% endblock %}
     {% block contenido %}
 
-            <div class="art">
+      <div class="art">
+              <h4>Ficha Personal</h4>
+              <div class="igp-block">
               <p>
-                Resumen {{ investigador.resumen }}
+                <span class="igp-panel-box">Resume </span>: {{ investigador.resumen }}
               </p>
-              <p>Web personal:  {{ investigador.web_personal }}</p>
+              </div>
+              <h4>Datos personales</h4>
+              <div class="igp-block">
+              <p>Web personal:  <a href="{{ investigador.web_personal }}" target="_blank">{{ investigador.web_personal }}</a></p>
               <p>Pais de Nacimiento:  {{ investigador.pais_nacimiento }}</p>
-              <p>Pais de residencia:  {{ investigador.pais }}</p>
-              <p>Región de residencia:  {{ investigador.region }}</p>
-              <p>Provincia de residencia:  {{ investigador.provincia }}</p>
-              <p>Distrito de residencia:  {{ investigador.distrito }}</p>
-            </div>
-            <hr />
+              <h5>Residencia</h5>
+              <p> <span class="igp-panel-box">Pais: </span> {{ investigador.pais }}</p>
+              <p> <span class="igp-panel-box">Región: </span> {{ investigador.region }}</p>
+              <p> <span class="igp-panel-box">Provincia: </span> {{ investigador.provincia }}</p>
+              <p> <span class="igp-panel-box">Distrito:</span>  {{ investigador.distrito }}</p>
+              </div>
+              <h4>Datos Académicos</h4>
+              <div class="igp-block">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                    <th>Grado</th>
+                    <th>Titulo</th>
+                    <th>Centro de Estudios</th>
+                    <th>País de estudios</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha finalizó</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <h4>Idiomas</h4>
+              <div class="igp-block">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                    <th>Idioma</th>
+                    <th>Letra</th>
+                    <th>Conservación</th>
+                    <th>Escritura</th>
+                    <th>Lengua Materna</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+      </div>
+      <hr />
 
 
     {% endblock %}
