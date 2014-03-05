@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
     {% block cabecera %}
 
-          <h3>{{investigador.nombres}}, {{investigador.apellidos}}</h3>
+          <div class="row-fluid"><img class="perfil fleft" src="/static/img/noavatar.jpg" alt=""><h3>{{investigador.nombres}}, {{investigador.apellidos}}</h3></div>
 
     {% endblock %}
     {% block contenido %}
-
-      <div class="art">
+    <div class="profile">
+      <div class="art span9">
+          <div class="menu-perfil span12">
+          <ul class="nav nav-sidebar nav-list">
+            <li class="igp-panel-box span2"><img src="/static/img/box.png" alt=""><a href="#">Sobre mi</a></li>
+            <li class="igp-panel-box span2"><img src="/static/img/Address_Book.png" alt=""><a href="#">Datos Personal</a></li>
+            <li class="igp-panel-box span2"><img src="/static/img/Chat.png" alt=""><a href="#">Datos Academicos</a></li>
+            <li class="igp-panel-box span2"><img src="/static/img/box.png" alt=""><a href="#">Idiomas</a></li>
+            <li class="igp-panel-box span2"><img src="/static/img/Portfolio.png" alt=""><a href="#">Proyectos de Investigación</a></li>
+            <li class="igp-panel-box span2"><img src="/static/img/Folder.png" alt=""><a href="#">Producción Cientifica</a></li>
+          </ul>
+          </div>
               <h4>Ficha Personal</h4>
               <div class="igp-block">
               <p>
@@ -57,7 +67,27 @@
                 </table>
               </div>
       </div>
-      <hr />
+      <div class="span3 sidebar">
+        <div class="box-igp-1">
+          <h4>Mis Publicaciones</h4>
+          <ul>
+            <li><a href="#">Climate change and Mediterranean seagrass meadows</a></li>
+            <li><a href="#">Prospeccions de gas i petroli a les Balears</a></li>
+            <li><a href="#">Què aporta la genètica a l’estudi de les espècies marines invasores a Europa?</a></li>
+          </ul>
 
+        </div>
+        <div class="box-igp-1">
+          <h4>Mi Blog</h4>
+          <ul>
+            <li><a href="#">La genètica a l’estudi de les espècies marines invasores a Europa?</a></li>
+            <li><a href="#">Climate change and Mediterranean seagrass meadows</a></li>
+            <li><a href="#">Prospeccions de gas i petroli a les Balears</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <hr />
+    </div>
 
     {% endblock %}

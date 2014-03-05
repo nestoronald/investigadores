@@ -1,13 +1,72 @@
 {% extends 'base.html' %}
+{% block cabecera %}
+            <div class="slider-igp">
+                <img src="/static/img/demo_home.jpg" alt="" />
+            </div>
+{% endblock %}
 {% block contenido %}
 <div class="row-fluid">
+    {% if user.is_authenticated%}
 
-    <div class="span9">
-    <p>Es de mi interés conocer el modo de ocurrencia de los terremotos en el Perú y sobre los procesos físicos que se desarrollan en la fuente sísmica. En ingeniería, conocer el peligro sísmico y su relación con el comportamiento dinámico de los suelos (sísmica, geofísica, geológica, tectónica, etc) y las estructuras. Asimismo, aplicar las técnicas de modelado numérico de tsunamis, para generar escenarios de base para la gestión del riesgo. La educación es una gran responsabilidad y la estamos asumiendo con paciencia y esfuerzo.</p>
+    <div class="span12">
+    <h4>Bienvenidos</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, velit, porro, molestiae facere fugit sed voluptates dignissimos laborum explicabo libero sint cumque id facilis ab veniam adipisci ipsam veritatis dolor!.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, odio, tempore, tempora, explicabo architecto facilis magni possimus alias ut neque dolor pariatur odit veniam impedit deleniti dicta nemo. Porro, explicabo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, inventore necessitatibus nemo minima laboriosam nihil architecto tempora incidunt blanditiis iure saepe pariatur adipisci earum ducimus itaque et temporibus impedit ullam?</p>
     </div>
-    <div class="span3"><img  width="185" alt="Hernan tavera" src="/static/img/tavera-hernan.jpg"></div>
+    {% else %}
+    <div class="span9">
+    <h4>Bienvenidos</h4>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, velit, porro, molestiae facere fugit sed voluptates dignissimos laborum explicabo libero sint cumque id facilis ab veniam adipisci ipsam veritatis dolor!.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, odio, tempore, tempora, explicabo architecto facilis magni possimus alias ut neque dolor pariatur odit veniam impedit deleniti dicta nemo. Porro, explicabo. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, inventore necessitatibus nemo minima laboriosam nihil architecto tempora incidunt blanditiis iure saepe pariatur adipisci earum ducimus itaque et temporibus impedit ullam?</p>
+    </div>
+    <div class="span3 box-igp-1">
+        <div class="login-home">
+        <form action="." method="POST">
+            {% csrf_token %}
+            {{ mensaje }}
+            {{ form.as_p }}
+            {% if next %}
+            <input type="hidden" value="{{next}}" name="next">
+            {% else %}
+            <input type="hidden" value="/" name="next">
+            {% endif %}
+            <button class="btn" type="submit"> Ingresar </button>
+            <!-- <h5>Registrarte <a href="{% url "vista_registro" %}">aquí</a></h5> -->
+        </form>
+        </div>
+    </div>
+    {% endif %}
+
 </div>
 <br>
+<div class="container-fluid last-news">
+<div class="span4">
+    <h4>Blog</h4>
+    <ul>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13358" title="Climate change and Mediterranean seagrass meadows: a synopsis for environmental managers"><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/03/Mateo-M.-A..jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="Climate change and Mediterranean seagrass meadows: a synopsis for environmental managers"></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13358" rel="bookmark">Climate change and Mediterranean seagrass meadows: a synopsis for environmental managers</a></span><br><span class="wpldate">March 3, 2014</span></li>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13327" title="INSPIRACIENCIA"><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/02/CA_IMPRENTA_POSTER_FLYER_2014_Página_1.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="INSPIRACIENCIA"></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13327" rel="bookmark">INSPIRACIENCIA</a></span><br><span class="wpldate">February 27, 2014</span></li>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13111" title="Buscamos Técnico Superior de Grado II (Formación Profesional II), con perfil en " informatica="" y="" comunicaciones""=""><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/01/cluster2.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="Buscamos Técnico Superior de Grado II (Formación Profesional II), con perfil en " informatica="" y="" comunicaciones""=""></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13111" rel="bookmark">Buscamos Técnico Superior de Grado II (Formación Profesional II), con perfil en “Informatica y Comunicaciones”</a></span><br><span class="wpldate">February 24, 2014</span></li>
+
+    </ul>
+</div>
+<div class="span4">
+    <h4>Publicaciones</h4>
+    <ul>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13374" title="“Connectivity of coral reef populations:  you can't always get where you want”"><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/03/06-13-2014-Howard-Lasker1.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="“Connectivity of coral reef populations:  you can't always get where you want”"></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13374" rel="bookmark">“Connectivity of coral reef populations:  you can’t always get where you want”</a></span><br><span class="wpldate">March 5, 2014</span></li>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13348" title="Què aporta la genètica a l’estudi de les espècies marines invasores a Europa?"><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2013/04/Pati1.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="Què aporta la genètica a l’estudi de les espècies marines invasores a Europa?"></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13348" rel="bookmark">Què aporta la genètica a l’estudi de les espècies marines invasores a Europa?</a></span><br><span class="wpldate">February 28, 2014</span></li>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13287" title="“Fine Particle Transport and Retention in Streams: Particulate Organic Carbon Dynamics and Pathogen Transmission”"><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/02/13-02-14-J.-Drummond.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="“Fine Particle Transport and Retention in Streams: Particulate Organic Carbon Dynamics and Pathogen Transmission”"></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13287" rel="bookmark">“Fine Particle Transport and Retention in Streams: Particulate Organic Carbon Dynamics and Pathogen Transmission”</a></span><br><span class="wpldate">February 10, 2014</span></li>
+    </ul>
+</div>
+<div class="span4">
+    <h4>Noticias</h4>
+    <ul>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13111" title="Buscamos Técnico Superior de Grado II (Formación Profesional II), con perfil en " informatica="" y="" comunicaciones""=""><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/01/cluster2.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="Buscamos Técnico Superior de Grado II (Formación Profesional II), con perfil en " informatica="" y="" comunicaciones""=""></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13111" rel="bookmark">Buscamos Técnico Superior de Grado II (Formación Profesional II), con perfil en “Informatica y Comunicaciones”</a></span><br><span class="wpldate">February 24, 2014</span></li>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13309" title="Prospeccions de gas i petroli a les Balears."><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/02/blancEivissa-diu-no.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="Prospeccions de gas i petroli a les Balears."></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13309" rel="bookmark">Prospeccions de gas i petroli a les Balears.</a></span><br><span class="wpldate">February 19, 2014</span></li>
+    <li><a class="thumb" href="http://www.ceab.csic.es/web/?p=13252" title="Xerrada-col·loqui: " s'abanell:="" sorra="" o="" roques?="" sis="" anys="" després""=""><img class="thinframe" src="http://www.ceab.csic.es/web/wp-content/themes/versatile/timthumb.php?src=http://www.ceab.csic.es/web/wp-content/uploads/2014/02/cartell1.jpg&amp;w=40&amp;h=40&amp;zc=1&amp;q=100" alt="Xerrada-col·loqui: " s'abanell:="" sorra="" o="" roques?="" sis="" anys="" després""=""></a><span class="title"><a href="http://www.ceab.csic.es/web/?p=13252" rel="bookmark">Xerrada-col·loqui: “S’Abanell: Sorra o roques? Sis anys després”</a></span><br><span class="wpldate">February 4, 2014</span></li>
+    </ul>
+<p></p>
+</div>
+</div>
 <div class="container-fluid">
     <div class="span3 igp-panel-box">
         <p class="text-large"><a title="Catálogo de Biblioteca - IGP" target="_blank" href="#"> <img border="0" alt="" src="/static/img/logo-biblioteca.jpg"></a></p>
