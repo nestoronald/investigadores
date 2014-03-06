@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^registro/$','Publicaciones.views.register_view',name='vista_registro'),
     url(r'^editPerfil/(?P<id_user>.*)/$','Publicaciones.views.edit_profile',name= "view_editar_perfil"),
     url(r'^editarPerfil/$','Publicaciones.views.editar_perfil',name= "editar_perfil"),
+    url(r'^lista/$','Publicaciones.views.publication_list',name= "editar_perfil"),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
