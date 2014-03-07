@@ -18,6 +18,10 @@
           </ul>
           </div>
               <h4>Ficha Personal</h4>
+
+              {% for li in lista %}
+                <p>{{li}}</p>
+              {% endfor %}
               <div class="igp-block">
               <p>
                 <span class="igp-panel-box">Resume </span>: {{ investigador.resumen }}

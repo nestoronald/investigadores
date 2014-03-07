@@ -40,11 +40,11 @@ def investigadores(request):
     inv = Investigador.objects.all()[:10]
     return render_to_response('investigadores.html',{'investigadores':inv},context_instance=RequestContext(request))
 def investigador(request,idinv=1):
-    # db = MySQLdb.connect(user='wmaster', db='demo', passwd='mysql', host='localhost')
-    # cursor = db.cursor()
-    # cursor.execute('SELECT * FROM empleados where id = id')
-    # lista = [row[1] for row in cursor.fetchall()]
-    # db.close()
+    db = MySQLdb.connect(user='wmaster', db='personal', passwd='igpwmaster', host='10.10.30.27')
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM  v_empleado_laboral  where idempleado = '+ idinv)
+    lista = [row[4] for row in cursor.fetchall()]
+    db.close()
     ctx = {'investigador':Investigador.objects.get(id=idinv),'lista':lista}
     return render_to_response('investigador.html',ctx,context_instance=RequestContext(request))
 
@@ -135,10 +135,14 @@ def editar_perfil(request):
 
 def publication_list(request):
     db = MySQLdb.connect(user='wmaster', db='DB_ITS', passwd='igpwmaster', host='10.10.30.25')
+    # db = MySQLdb.connect(user='wmaster', db='demo', passwd='igpwmaster', host='localhost')
     cursor = db.cursor()
     # cursor.execute('SELECT * FROM data d, subcategory s, category c WHERE  d.idsubcategory=s.idsubcategory and s.idcategory=c.idcategory  and  s.subcategory_enable=1  AND   (ExtractValue(data_content,"publicaciones/authorPRI/idauthor0")= "590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor0") ="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor1")  ="590" OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor2")  ="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor3") ="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor4") ="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor5") ="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor6")  ="590" OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor7")  ="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor8") ="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor9") ="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor10")="590"  OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor11")="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor12")="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor13")="590"  OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor14")="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor15")="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor16")="590"  OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor17")="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor18")="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor19")="590"  OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor20")="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor21")="590"  OR ExtractValue(data_content,"publicaciones/authorSEC/idauthor22")="590"  OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor23")="590" OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor24")="590"  OR  ExtractValue(data_content,"publicaciones/authorSEC/idauthor25")="590")')
-    cursor.execute('SELECT * FROM data d, subcategory s, category c WHERE d.idsubcategory=s.idsubcategory and s.idcategory=c.idcategory and s.subcategory_enable=1 AND (ExtractValue(data_content,"publicaciones/authorPRI/idauthor0")= "590")')
-    lista = [row[0] for row in cursor.fetchall()]
+    cursor.execute(' SELECT  * FROM data d, subcategory s, category c WHERE d.idsubcategory = s.idsubcategory AND s.idcategory = c.idcategory AND s.subcategory_enable =1 AND (ExtractValue( data_content,  "publicaciones/authorPRI/idauthor0"  )  =  "569") LIMIT 0 , 30')
+    # cursor.execute('SELECT * FROM data d, subcategory s, category c WHERE d.idsubcategory=s.idsubcategory and s.idcategory=c.idcategory and s.subcategory_enable=1 or d.iddata=1 or d.iddata=581 AND (ExtractValue(data_content,"publicaciones/authorPRI/idauthor0")= "569")')
+    # cursor.execute('SELECT * FROM items i, coments c WHERE i.id_item = c.id_item AND i.id_item = 3 AND ExtractValue( item, "publicaciones/authorPRI/idauthor0" ) ="569"')
+    lista = [row[6] for row in cursor.fetchall()]
+
     db.close()
     return render_to_response('lista.html', {'lista': lista})
 

@@ -626,3 +626,6 @@ li {
 .profile .sidebar li{
     list-style-type: disc;
 }
+.clear{
+    clear: both;
+}
