@@ -1,6 +1,10 @@
 $(function(){
   $(".nav-sidebar a").click(function(e){
     $(".nav-sidebar li").removeClass("active");
+    var iddiv= $(this).attr("href");
+    var top_div = $(iddiv).offset().top;
+    $('body,html').animate({scrollTop: top_div}, 500);
+
     $(this).parent("li").addClass("active");
     conte = $(this).attr("href")
     $(".reser").hide();
@@ -38,3 +42,4 @@ $(function(){
   // $(".fx_today").val(fx_today);
   $(".login-home input").addClass("span12");
 });
+
