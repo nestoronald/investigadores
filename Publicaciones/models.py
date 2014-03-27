@@ -30,7 +30,7 @@ class Investigador(models.Model):
     subarea_inv = models.CharField(max_length=80, verbose_name='Subarea de Investigación')
     disciplina = models.CharField(max_length=80, verbose_name='Disciplina de Investigación')
     def __unicode__(self):
-        nombrecompleto = "%s %s"%(self.nombres, self.apellidos)
+        nombrecompleto = "%s %s "%(self.nombres, self.apellidos)
         return nombrecompleto
 
 
